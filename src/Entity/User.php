@@ -17,6 +17,13 @@ class User
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
+    #[ORM\ManyToOne(inversedBy: 'users')]
+        #[ORM\JoinColumn(name:'room_ref',referencedColumnName:'ref')]
+    private ?Room $classroom = null;
+
+
+   
+
     public function getId(): ?int
     {
         return $this->id;
@@ -33,4 +40,18 @@ class User
 
         return $this;
     }
+
+    public function getClassroom(): ?Room
+    {
+        return $this->classroom;
+    }
+
+    public function setClassroom(?Room $classroom): static
+    {
+        $this->classroom = $classroom;
+
+        return $this;
+    }
+
+   
 }
